@@ -46,7 +46,7 @@ end
 B.plan = function(opts)
 	opts = opts or {}
 	opts.limit = opts.limit or 100
-	local cmd = vim.tbl_flatten({ "terraform", "plan", "-json" })
+	local cmd = vim.tbl_flatten({ "terraform", "plan", "-json", "-no-color", "-input=false" })
 	local title = "Terraform plan"
 	msgLoadingPopup("Loading " .. title, cmd, function(results)
 		if results[1] == "" then
@@ -60,6 +60,28 @@ B.plan = function(opts)
 				entry_maker = terraform_make_entry.get_from_plan(opts),
 			}),
 			previewer = terraform_previewers.plan_preview.new(opts),
+			sorter = conf.file_sorter(opts),
+		}):find()
+	end)
+end
+
+B.plan_targeted = function(opts)
+	opts = opts or {}
+	opts.limit = opts.limit or 100
+	local cmd = vim.tbl_flatten({ "terraform", "plan", "-json", "-no-color", "-input=false" })
+	local title = "Terraform plan targeted"
+	msgLoadingPopup("Loading " .. title, cmd, function(results)
+		if results[1] == "" then
+			print("Empty " .. title)
+			return
+		end
+		pickers.new(opts, {
+			prompt_title = title,
+			finder = finders.new_table({
+				results = results,
+				entry_maker = terraform_make_entry.get_from_plan(opts),
+			}),
+			previewer = terraform_previewers.plan_targeted_preview.new(opts),
 			sorter = conf.file_sorter(opts),
 		}):find()
 	end)

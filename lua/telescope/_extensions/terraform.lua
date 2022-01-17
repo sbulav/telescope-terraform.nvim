@@ -7,6 +7,7 @@ local terraform_builtin = require("telescope._extensions.terraform.builtin")
 
 return require("telescope").register_extension({
 	exports = {
-		run = terraform_builtin.plan,
+		plan = terraform_builtin.plan,
+		plan_targeted = terraform_builtin.plan_targeted,
 	},
 })
