@@ -1,1 +1,3 @@
-# telescope-tf
+# telescope-terraform.nvim
+
+[WIP] 
