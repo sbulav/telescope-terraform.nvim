@@ -72,6 +72,7 @@ B.plan = function(opts)
       attach_mappings = function(_, map)
         actions.select_default:replace(terraform_actions.append_resource_addr)
         map("i", "<c-a>", terraform_actions.apply(opts))
+        map("i", "<c-i>", terraform_actions.init(opts))
         map("i", "<c-d>", terraform_actions.destroy(opts))
         return true
       end,
