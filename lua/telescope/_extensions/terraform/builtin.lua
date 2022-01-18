@@ -127,4 +127,17 @@ B.apply = function(opts)
   terraform_actions.apply(opts)()
 end
 
+B.init = function(opts)
+  opts = opts or {}
+  opts.limit = opts.limit or 100
+  opts.wincmd = opts.wincmd or "botright vnew"
+  opts.wrap = opts.wrap or "nowrap"
+  opts.filetype = opts.filetype or "bash"
+  opts.timeout = opts.timeout or 10000
+  opts.wait_interval = opts.wait_interval or 5
+  opts.mode = opts.mode or "async"
+
+  terraform_actions.init(opts)()
+end
+
 return B

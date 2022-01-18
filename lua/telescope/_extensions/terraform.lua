@@ -9,6 +9,7 @@ return require("telescope").register_extension {
   exports = {
     apply = terraform_builtin.apply,
     destroy = terraform_builtin.destroy,
+    init = terraform_builtin.init,
     plan = terraform_builtin.plan,
     plan_targeted = terraform_builtin.plan_targeted,
   },
